@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mobiquity.calculator</groupId>
-    <artifactId>Calculator</artifactId>
+    <groupId>com.mobiquity.localdel</groupId>
+    <artifactId>Locale Food</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>apk</packaging>
-    <name>My Calculator App</name>
+    <name>Local Food</name>
 
     <dependencies>
         <!--Unit testing-->
