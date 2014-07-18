@@ -5,9 +5,12 @@
               android:layout_height="fill_parent"
         >
 
+    <!-- maybe useful later android:fillViewport="true" -->
     <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/CityList"/>
+            android:layout_height="match_parent"
+            android:id="@+id/CityList"
+            />
+
 </LinearLayout>
 
