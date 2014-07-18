@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-
-
-    <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/favIcon"
-        />
 
     <ImageView
             android:layout_width="match_parent"
@@ -20,12 +12,25 @@
             android:id="@+id/CityImage" android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"/>
 
+    <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/heart_outline"
+            android:id="@+id/favIcon"
+            android:layout_gravity="right"
+            />
+
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CityDescription"
             android:textSize="30dp"
             android:textColor="#ffffffff"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="4"
+    />
 
-</LinearLayout>
+</FrameLayout>

@@ -12,6 +12,8 @@ import com.example.LocalDel.R;
 
 import java.util.ArrayList;
 
+import static android.view.View.OnClickListener;
+
 /**
  * Created by dalexander on 7/17/14.
  */
@@ -71,10 +73,23 @@ public class CityListAdapter implements ListAdapter {
         // Lookup view for data population
         TextView filenameView = (TextView) convertView.findViewById(R.id.CityDescription);
         // Populate the data into the template view using the data object
-        filenameView.setText(city.getName());
+        filenameView.setText(city.getSubtitleString());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
         imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
+
+        final ImageView heart = (ImageView) convertView.findViewById(R.id.favIcon);
+        heart.setOnClickListener(new OnClickListener() {
+            boolean isFilled = false;
+            public void onClick(View v) {
+                if(isFilled) {
+                    heart.setImageResource(R.drawable.heart_outline);
+                } else {
+                    heart.setImageResource(R.drawable.heart_filled);
+                }
+                isFilled = !isFilled;
+            }
+        });
 
         //attach onClick to view image for each list item
         /*convertView.setOnClickListener(new View.OnClickListener() {
