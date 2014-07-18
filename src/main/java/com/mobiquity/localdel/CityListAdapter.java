@@ -1,6 +1,7 @@
 package com.mobiquity.localdel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,7 @@ public class CityListAdapter implements ListAdapter {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
         imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
 
+
         final ImageView heart = (ImageView) convertView.findViewById(R.id.favIcon);
         heart.setOnClickListener(new OnClickListener() {
             boolean isFilled = false;
@@ -90,11 +92,11 @@ public class CityListAdapter implements ListAdapter {
         });
 
         //attach onClick to view image for each list item
-        /*convertView.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //viewCity(city)
+                city.view(context);
             }
-        });*/
+        });
 
         // Return the completed view to render on screen
         return convertView;

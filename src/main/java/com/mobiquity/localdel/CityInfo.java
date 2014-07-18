@@ -1,5 +1,8 @@
 package com.mobiquity.localdel;
 
+import android.content.Context;
+import android.content.Intent;
+
 /**
  * Created by dalexander on 7/18/14.
  */
@@ -36,6 +39,13 @@ public class CityInfo {
 
     public String getSubtitleString() {
         return name+", "+country;
+    }
+
+    public void view(Context context){
+        Intent intent = new Intent(context, CityInfoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+
     }
 
 }
