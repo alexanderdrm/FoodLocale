@@ -42,7 +42,7 @@ public class CityListAdapter implements ListAdapter {
         return cities.size();
     }
 
-    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!");
+    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!",999);
     @Override
     public CityInfo getItem(int position) {
         //return null;
