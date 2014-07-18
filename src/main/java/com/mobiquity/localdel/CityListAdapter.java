@@ -5,9 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
 
-/**
- * Created by dalexander on 7/17/14.
- */
+
 public class CityListAdapter implements Adapter {
 
     @Override
