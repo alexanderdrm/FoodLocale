@@ -1,25 +1,29 @@
 package com.mobiquity.localdel;
 
-import android.app.Activity;
+import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import com.example.LocalDel.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by dalexander on 7/17/14.
  */
 public class CityListAdapter implements ListAdapter {
 
-    Activity activity;
+    Context context;
 
-    public CityListAdapter(Activity act) {
-        this.activity = act;
+    ArrayList<CityInfo> cities;
+
+    public CityListAdapter(Context con, ArrayList<CityInfo> cities) {
+        this.context = con;
+        this.cities = cities;
     }
 
     @Override
@@ -34,14 +38,14 @@ public class CityListAdapter implements ListAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return cities.size();
     }
 
-    CityInfo defaultCity = new CityInfo("Defaultness", "This is the default city!  It's round!");
+    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!");
     @Override
     public CityInfo getItem(int position) {
         //return null;
-        return defaultCity;
+        return cities.get(position);
     }
 
     @Override
@@ -61,7 +65,7 @@ public class CityListAdapter implements ListAdapter {
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(activity).inflate(R.layout.city_list_element, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.city_list_element, parent, false);
         }
 
         // Lookup view for data population
@@ -70,7 +74,7 @@ public class CityListAdapter implements ListAdapter {
         filenameView.setText(city.getName());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
-        imageView.setImageDrawable(activity.getResources().getDrawable(R.drawable.circle));
+        imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
 
         //attach onClick to view image for each list item
         /*convertView.setOnClickListener(new View.OnClickListener() {

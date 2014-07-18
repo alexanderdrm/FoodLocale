@@ -8,16 +8,24 @@
 
 
     <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/favIcon"
+        />
+
+    <ImageView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:id="@+id/CityImage" android:layout_gravity="center_horizontal"
-            />
+            android:adjustViewBounds="true"/>
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CityDescription"
             android:textSize="30dp"
+            android:textColor="#ffffffff"
             android:gravity="center"/>
 
 </LinearLayout>
