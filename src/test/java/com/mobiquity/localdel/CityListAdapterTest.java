@@ -11,7 +11,7 @@ public class CityListAdapterTest {
 
     private CityListAdapter listAdapter;
 
-    
+
 
     @Test
     public void shouldNotBeNull() throws Exception

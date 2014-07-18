@@ -9,12 +9,17 @@ public class CityInfo {
     String shortDescription; //currently unused
     String name;
 
+    //we need to switch to using constants for the state and country name for database goodness later
+    String state;
+    String country;
+
     public CityInfo() {
     }
 
-    public CityInfo(String name, String desc) {
+    public CityInfo(String name, String country, String desc) {
         description = desc;
         this.name = name;
+        this.country = country;
     }
 
     public String getDescription() {
@@ -27,6 +32,10 @@ public class CityInfo {
 
     public String getName() {
         return name;
+    }
+
+    public String getSubtitleString() {
+        return name+", "+country;
     }
 
 }
