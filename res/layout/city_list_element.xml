@@ -4,20 +4,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/CityImage" android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"/>
-
-    <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/heart_outline"
-            android:id="@+id/favIcon"
-            android:layout_gravity="right"
-            />
 
     <TextView
             android:layout_width="match_parent"
