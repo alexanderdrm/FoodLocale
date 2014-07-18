@@ -1,6 +1,7 @@
 package com.mobiquity.localdel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import com.example.LocalDel.R;
 
+
 import java.util.ArrayList;
 
 import static android.view.View.OnClickListener;
 
-/**
- * Created by dalexander on 7/17/14.
- */
 public class CityListAdapter implements ListAdapter {
 
     Context context;
@@ -43,7 +42,7 @@ public class CityListAdapter implements ListAdapter {
         return cities.size();
     }
 
-    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!");
+    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!",999);
     @Override
     public CityInfo getItem(int position) {
         //return null;
@@ -78,6 +77,7 @@ public class CityListAdapter implements ListAdapter {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
         imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
 
+
         final ImageView heart = (ImageView) convertView.findViewById(R.id.favIcon);
         heart.setOnClickListener(new OnClickListener() {
             boolean isFilled = false;
@@ -92,11 +92,11 @@ public class CityListAdapter implements ListAdapter {
         });
 
         //attach onClick to view image for each list item
-        /*convertView.setOnClickListener(new View.OnClickListener() {
+        convertView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //viewCity(city)
+                city.view(context);
             }
-        });*/
+        });
 
         // Return the completed view to render on screen
         return convertView;

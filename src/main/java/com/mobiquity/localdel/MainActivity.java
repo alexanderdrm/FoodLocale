@@ -20,8 +20,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
 
         CityListAdapter listAdapter = new CityListAdapter(getApplicationContext(), new ArrayList<CityInfo>(Arrays.asList(new CityInfo[]{
-            new CityInfo("CityOne","CountryOne","This is the first!"), new CityInfo("CityTwo","CountryOne","This is the second!"),
-                new CityInfo("CityFour","CountryTwo","This is the third!"), new CityInfo("CityThree","CountryTwo","This is the fourth!")
+             CityFactory.createCity("CityOne","CountryOne","This is the first!"),  CityFactory.createCity("CityTwo","CountryOne","This is the second!"),
+                 CityFactory.createCity("CityFour","CountryTwo","This is the third!"), CityFactory.createCity("CityThree","CountryTwo","This is the fourth!")
         })));
         ListView cityList = (ListView) findViewById(R.id.CityList);
 
