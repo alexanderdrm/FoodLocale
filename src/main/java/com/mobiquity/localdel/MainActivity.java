@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.example.LocalDel.R;
 import sun.applet.Main;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ public class MainActivity extends Activity {
 
     private String[] drawerTitles;
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
+    private LinearLayout mDrawerList;
 
 
     private String mTitle;
@@ -50,10 +51,10 @@ public class MainActivity extends Activity {
         drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList = (LinearLayout) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, drawerTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
@@ -63,6 +64,20 @@ public class MainActivity extends Activity {
                 //DelicacyActivity.activateActivity(getApplicationContext());
             }
 
+        });*/
+
+        findViewById(R.id.city_drawer_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.activateActivity(getApplicationContext());
+            }
+        });
+
+        findViewById(R.id.delicacy_drawer_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //DelicacyActivity.activateActivity(getApplicationContext());
+            }
         });
 
         mTitle = mDrawerTitle = getTitle().toString();

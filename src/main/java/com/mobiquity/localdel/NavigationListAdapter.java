@@ -68,9 +68,9 @@ public class NavigationListAdapter implements ListAdapter {
         }
 
         // Lookup view for data population
-        TextView desc = (TextView) convertView.findViewById(R.id.DrawerItemDescription);
+        //TextView desc = (TextView) convertView.findViewById(R.id.DrawerItemDescription);
         // Populate the data into the template view using the data object
-            desc.setText(R.string.drawer_location);
+        //desc.setText(R.string.drawer_location);
 //       switch
 
 
