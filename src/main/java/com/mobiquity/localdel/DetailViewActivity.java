@@ -10,7 +10,7 @@ import com.example.LocalDel.R;
 /**
  * Created by rsampath on 7/18/14.
  */
-public class CityInfoActivity extends Activity {
+public class DetailViewActivity extends Activity {
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -18,8 +18,8 @@ public class CityInfoActivity extends Activity {
         setContentView(R.layout.city_view);
 
         Intent intent = getIntent();
-        int cityId = intent.getIntExtra("CityId",0);
-        CityInfo cityInfo = CityFactory.getCityById(cityId);
+        int cityId = intent.getIntExtra("InfoId",0);
+        BaseInfo cityInfo = InfoFactory.getInfo(cityId);
 
         TextView description = (TextView)findViewById(R.id.cityViewDescription);
         TextView cityName = (TextView)findViewById(R.id.cityViewName);
@@ -27,8 +27,7 @@ public class CityInfoActivity extends Activity {
 
         description.setText(cityInfo.getDescription());
         cityName.setText(cityInfo.getSubtitleString());
-        image.setImageResource(R.drawable.taj_mahal);
-
+        image.setImageResource(cityInfo.getDrawable());
 
     }
 

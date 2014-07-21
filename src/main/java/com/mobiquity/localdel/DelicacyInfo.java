@@ -48,9 +48,9 @@ public class DelicacyInfo  implements BaseInfo{
 
     @Override
     public void view(Context context){
-        Intent intent = new Intent(context, CityInfoActivity.class);
+        Intent intent = new Intent(context, DetailViewActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("DelicacyId",id);
+        intent.putExtra("InfoId",id);
         context.startActivity(intent);
     }
 

@@ -34,6 +34,13 @@ public class MainActivity extends Activity {
     private String mDrawerTitle;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private static final int CITIES_VIEW = 0, DELICACIES_VIEW = 1;
+
+    private static int activeView = 0;
+
+    InfoListAdapter cityAdapter;
+    InfoListAdapter delicacyAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,25 +49,24 @@ public class MainActivity extends Activity {
 
         ListView infoList = (ListView) findViewById(R.id.info_list);
 
-        InfoListAdapter cityListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new CityInfo[]{
-             CityFactory.createCity("CityOne","CountryOne","This is the first!"),  CityFactory.createCity("CityTwo","CountryOne","This is the second!"),
-                 CityFactory.createCity("CityFour","CountryTwo","This is the third!"), CityFactory.createCity("CityThree","CountryTwo","This is the fourth!")
+        cityAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new CityInfo[]{
+             InfoFactory.createCity("CityOne","CountryOne","This is the first!"),  InfoFactory.createCity("CityTwo","CountryOne","This is the second!"),
+                InfoFactory.createCity("CityFour","CountryTwo","This is the third!"), InfoFactory.createCity("CityThree","CountryTwo","This is the fourth!")
         })));
 
-        InfoListAdapter delicacyListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new DelicacyInfo[]{
-                DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),
-                        DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever")})));
+        delicacyAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new DelicacyInfo[]{
+                InfoFactory.createDelicacy("Baklava","I have no idea whatsoever"),InfoFactory.createDelicacy("Baklava","I have no idea whatsoever"),
+                InfoFactory.createDelicacy("Baklava","I have no idea whatsoever")})));
 
         Intent intent = getIntent();
 
-        if(intent != null) {
-            Log.d(TAG, "viewType is "+intent.getIntExtra("viewType", 0));
-        }
-        if(intent == null || intent.getIntExtra("viewType", 0)==CITIES_VIEW) {
-            infoList.setAdapter(cityListAdapter);
-        } else {
 
-            infoList.setAdapter(delicacyListAdapter);
+        if(intent == null || intent.getIntExtra("viewType", 0)==CITIES_VIEW) {
+            activeView = 0;
+            infoList.setAdapter(cityAdapter);
+        } else {
+            activeView = 1;
+            infoList.setAdapter(delicacyAdapter);
         }
 
         drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
@@ -146,13 +152,20 @@ public class MainActivity extends Activity {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-
+        DelicacyApplication.getInstance().setInListView();
 
     }
 
-    private static final int CITIES_VIEW = 0, DELICACIES_VIEW = 1;
+
 
     public static void activeCityView(Context context) {
+        if(DelicacyApplication.getInstance().isInListView()) {
+            if(activeView == CITIES_VIEW) {
+                return;
+            } else {
+                //"just" swap out the adapter...
+            }
+        }
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("viewType", CITIES_VIEW);
@@ -160,6 +173,13 @@ public class MainActivity extends Activity {
     }
 
     public static void activeDelicacyView(Context context) {
+        if(DelicacyApplication.getInstance().isInListView()) {
+            if(activeView == DELICACIES_VIEW) {
+                return;
+            } else {
+                //just swap out the adapter...
+            }
+        }
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("viewType", DELICACIES_VIEW);

@@ -12,7 +12,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name = "com.mobiquity.localdel.CityInfoActivity">
+        <activity android:name = "com.mobiquity.localdel.DetailViewActivity">
 
           </activity>
     </application>

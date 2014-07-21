@@ -28,8 +28,22 @@ public class DelicacyApplication extends Application {
 
     }*/
 
+    private boolean inListView = true;
+
     public static DelicacyApplication getInstance() {
         return instance;
+    }
+
+    public void setInListView() {
+        inListView = true;
+    }
+
+    public void setInDetailView() {
+        inListView = false;
+    }
+
+    public boolean isInListView() {
+        return inListView;
     }
 
     /*private Bus bus;
