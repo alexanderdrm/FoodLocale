@@ -69,23 +69,9 @@ public class MainActivity extends Activity {
             infoList.setAdapter(delicacyAdapter);
         }
 
-        drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (LinearLayout) findViewById(R.id.left_drawer);
-
-        // Set the adapter for the list view
-        /*mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, drawerTitles));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int position, long id) {
-                MainActivity.activateActivity(getApplicationContext());
-                //DelicacyActivity.activateActivity(getApplicationContext());
-            }
-
-        });*/
 
         findViewById(R.id.city_drawer_button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +143,6 @@ public class MainActivity extends Activity {
     }
 
 
-
     public static void activeCityView(Context context) {
         if(DelicacyApplication.getInstance().isInListView()) {
             if(activeView == CITIES_VIEW) {
@@ -185,13 +170,6 @@ public class MainActivity extends Activity {
         intent.putExtra("viewType", DELICACIES_VIEW);
         context.startActivity(intent);
     }
-
-    /*public static void activateActivity(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-
-    }*/
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
