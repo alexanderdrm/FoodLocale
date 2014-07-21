@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ public class MainActivity extends Activity {
     /**
      * Called when the context is first created.
      */
+
+    private static final String TAG = MainActivity.class.getName();
 
     private String[] drawerTitles;
     private DrawerLayout mDrawerLayout;
@@ -37,20 +40,28 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
 
+        ListView infoList = (ListView) findViewById(R.id.info_list);
+
         InfoListAdapter cityListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new CityInfo[]{
              CityFactory.createCity("CityOne","CountryOne","This is the first!"),  CityFactory.createCity("CityTwo","CountryOne","This is the second!"),
                  CityFactory.createCity("CityFour","CountryTwo","This is the third!"), CityFactory.createCity("CityThree","CountryTwo","This is the fourth!")
         })));
-        ListView cityList = (ListView) findViewById(R.id.CityList);
-
-        cityList.setAdapter(cityListAdapter);
 
         InfoListAdapter delicacyListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new DelicacyInfo[]{
                 DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),
                         DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever")})));
-        ListView delicacyList = (ListView) findViewById(R.id.CityList);
 
-        cityList.setAdapter(delicacyListAdapter);
+        Intent intent = getIntent();
+
+        if(intent != null) {
+            Log.d(TAG, "viewType is "+intent.getIntExtra("viewType", 0));
+        }
+        if(intent == null || intent.getIntExtra("viewType", 0)==CITIES_VIEW) {
+            infoList.setAdapter(cityListAdapter);
+        } else {
+
+            infoList.setAdapter(delicacyListAdapter);
+        }
 
         drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
 
@@ -73,14 +84,14 @@ public class MainActivity extends Activity {
         findViewById(R.id.city_drawer_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activateActivity(getApplicationContext());
+                MainActivity.activeCityView(getApplicationContext());
             }
         });
 
         findViewById(R.id.delicacy_drawer_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //DelicacyActivity.activateActivity(getApplicationContext());
+                MainActivity.activeDelicacyView(getApplicationContext());
             }
         });
 
@@ -139,12 +150,28 @@ public class MainActivity extends Activity {
 
     }
 
-    public static void activateActivity(Context context) {
+    private static final int CITIES_VIEW = 0, DELICACIES_VIEW = 1;
+
+    public static void activeCityView(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("viewType", CITIES_VIEW);
+        context.startActivity(intent);
+    }
+
+    public static void activeDelicacyView(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("viewType", DELICACIES_VIEW);
+        context.startActivity(intent);
+    }
+
+    /*public static void activateActivity(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
 
-    }
+    }*/
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
