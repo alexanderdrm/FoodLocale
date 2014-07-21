@@ -6,28 +6,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.LocalDel.R;
 
-/**
- * Created by dalexander on 7/18/14.
- */
-public class CityInfo implements BaseInfo{
+import java.util.ArrayList;
 
+/**
+ * Created by rsampath on 7/21/14.
+ */
+public class DelicacyInfo  implements BaseInfo{
     String description;
     String shortDescription; //currently unused
     String name;
     int id;
+    ArrayList<Integer> cityIds = new ArrayList<Integer>();
 
-    //we need to switch to using constants for the state and country name for database goodness later
-    String state;
-    String country;
-
-    public CityInfo() {
+    public DelicacyInfo() {
 
     }
 
-    public CityInfo(String name, String country, String desc, int id) {
+    public DelicacyInfo(String name, String desc, int id) {
         description = desc;
         this.name = name;
-        this.country = country;
         this.id = id;
     }
 
@@ -46,14 +43,14 @@ public class CityInfo implements BaseInfo{
 
     @Override
     public String getSubtitleString() {
-        return name+", "+country;
+        return name;
     }
 
     @Override
     public void view(Context context){
         Intent intent = new Intent(context, CityInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("CityId",id);
+        intent.putExtra("DelicacyId",id);
         context.startActivity(intent);
     }
 
@@ -61,12 +58,11 @@ public class CityInfo implements BaseInfo{
     public void populateView(TextView location, TextView desc, ImageView image) {
         desc.setText(getDescription());
         location.setText(getSubtitleString());
-        image.setImageResource(R.drawable.taj_mahal);
+        image.setImageResource(R.drawable.baklava);
     }
 
     @Override
     public int getDrawable(){
-        return R.drawable.taj_mahal;
+        return R.drawable.baklava;
     }
-
 }

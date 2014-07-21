@@ -7,9 +7,9 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by rsampath on 7/18/14.
  */
-public class CityListAdapterTest {
+public class InfoListAdapterTest {
 
-    private CityListAdapter listAdapter;
+    private InfoListAdapter listAdapter;
 
     @Test
     public void shouldNotBeNull() throws Exception

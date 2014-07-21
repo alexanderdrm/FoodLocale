@@ -10,11 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.example.LocalDel.R;
-import sun.applet.Main;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -40,13 +37,20 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main);
 
-        CityListAdapter listAdapter = new CityListAdapter(getApplicationContext(), new ArrayList<CityInfo>(Arrays.asList(new CityInfo[]{
+        InfoListAdapter cityListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new CityInfo[]{
              CityFactory.createCity("CityOne","CountryOne","This is the first!"),  CityFactory.createCity("CityTwo","CountryOne","This is the second!"),
                  CityFactory.createCity("CityFour","CountryTwo","This is the third!"), CityFactory.createCity("CityThree","CountryTwo","This is the fourth!")
         })));
         ListView cityList = (ListView) findViewById(R.id.CityList);
 
-        cityList.setAdapter(listAdapter);
+        cityList.setAdapter(cityListAdapter);
+
+        InfoListAdapter delicacyListAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new DelicacyInfo[]{
+                DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever"),
+                        DelicacyFactory.createDelicacy("Baklava","I have no idea whatsoever")})));
+        ListView delicacyList = (ListView) findViewById(R.id.CityList);
+
+        cityList.setAdapter(delicacyListAdapter);
 
         drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
 

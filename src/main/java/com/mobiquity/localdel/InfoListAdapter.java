@@ -1,7 +1,6 @@
 package com.mobiquity.localdel;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +15,15 @@ import java.util.ArrayList;
 
 import static android.view.View.OnClickListener;
 
-public class CityListAdapter implements ListAdapter {
+public class InfoListAdapter implements ListAdapter {
 
     Context context;
 
-    ArrayList<CityInfo> cities;
+    ArrayList<BaseInfo> infos;
 
-    public CityListAdapter(Context con, ArrayList<CityInfo> cities) {
+    public InfoListAdapter(Context con, ArrayList<BaseInfo> cities) {
         this.context = con;
-        this.cities = cities;
+        this.infos = cities;
     }
 
     @Override
@@ -39,14 +38,13 @@ public class CityListAdapter implements ListAdapter {
 
     @Override
     public int getCount() {
-        return cities.size();
+        return infos.size();
     }
 
-    CityInfo defaultCity = new CityInfo("Defaultness", "Defaulte", "This is the default city!  It's round!",999);
     @Override
-    public CityInfo getItem(int position) {
+    public BaseInfo getItem(int position) {
         //return null;
-        return cities.get(position);
+        return infos.get(position);
     }
 
     @Override
@@ -62,7 +60,7 @@ public class CityListAdapter implements ListAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        final CityInfo city = getItem(position);
+        final BaseInfo info = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -72,10 +70,10 @@ public class CityListAdapter implements ListAdapter {
         // Lookup view for data population
         TextView filenameView = (TextView) convertView.findViewById(R.id.CityDescription);
         // Populate the data into the template view using the data object
-        filenameView.setText(city.getSubtitleString());
+        filenameView.setText(info.getSubtitleString());
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
-        imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
+        imageView.setImageDrawable(context.getResources().getDrawable(info.getDrawable()));
 
         // city.populateView(filenameView, null, imageView); //this is one option, but it doesn't save us much trouble
 
@@ -95,7 +93,7 @@ public class CityListAdapter implements ListAdapter {
         //attach onClick to view image for each list item
         convertView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                city.view(context);
+                info.view(context);
             }
         });
 
