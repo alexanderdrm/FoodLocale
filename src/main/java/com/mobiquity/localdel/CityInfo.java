@@ -2,6 +2,9 @@ package com.mobiquity.localdel;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.example.LocalDel.R;
 
 /**
  * Created by dalexander on 7/18/14.
@@ -49,7 +52,13 @@ public class CityInfo {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("CityId",id);
         context.startActivity(intent);
+    }
 
+    //likely not all that useful-- but here in case it's needed in the future
+    public void populateView(TextView location, TextView desc, ImageView image) {
+        desc.setText(getDescription());
+        location.setText(getSubtitleString());
+        image.setImageResource(R.drawable.taj_mahal);
     }
 
 }

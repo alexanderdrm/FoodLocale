@@ -77,6 +77,7 @@ public class CityListAdapter implements ListAdapter {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.CityImage);
         imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.taj_mahal));
 
+        // city.populateView(filenameView, null, imageView); //this is one option, but it doesn't save us much trouble
 
         final ImageView heart = (ImageView) convertView.findViewById(R.id.favIcon);
         heart.setOnClickListener(new OnClickListener() {

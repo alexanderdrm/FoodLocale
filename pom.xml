@@ -28,6 +28,13 @@
             <scope>provided</scope>
         </dependency>
 
+	<!--Required for Drawer-->
+	<dependency>
+	    <groupId>android.support</groupId>
+	    <artifactId>compatibility-v4</artifactId>
+            <version>20.0.0</version>
+	</dependency>
+
         <!--Unit testing-->
         <dependency>
             <groupId>org.robolectric</groupId>
