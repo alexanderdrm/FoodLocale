@@ -3,5 +3,6 @@
     <string name="app_name">LocalDel</string>
     <string name="drawer_open">Open-Drawer</string>
     <string name="drawer_close">Close-Drawer</string>
-
+    <string name="drawer_location">Locations</string>
+    <string name="drawer_delicacy">Delicacies</string>
 </resources>

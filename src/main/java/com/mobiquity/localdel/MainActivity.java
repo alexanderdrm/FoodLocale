@@ -2,6 +2,7 @@ package com.mobiquity.localdel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.example.LocalDel.R;
+import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,7 @@ public class MainActivity extends Activity {
      * Called when the context is first created.
      */
 
-    private String[] mPlanetTitles;
+    private String[] drawerTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
@@ -45,18 +47,20 @@ public class MainActivity extends Activity {
 
         cityList.setAdapter(listAdapter);
 
-        mPlanetTitles = new String[]{"mercury", "venus", "earth", "mars"};
+        drawerTitles = new String[]{getString(R.string.drawer_location),getString(R.string.drawer_delicacy)};
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
+                R.layout.drawer_list_item, drawerTitles));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                //selectItem(position);
+                MainActivity.activateActivity(getApplicationContext());
+                //DelicacyActivity.activateActivity(getApplicationContext());
             }
 
         });
@@ -113,6 +117,13 @@ public class MainActivity extends Activity {
         getActionBar().setHomeButtonEnabled(true);
 
 
+
+    }
+
+    public static void activateActivity(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
 
     }
 
