@@ -10,7 +10,7 @@ import com.example.LocalDel.R;
 /**
  * Created by rsampath on 7/18/14.
  */
-public class DetailViewActivity extends Activity {
+public class DetailViewActivity extends DraweredActivity {
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -28,6 +28,8 @@ public class DetailViewActivity extends Activity {
         description.setText(cityInfo.getDescription());
         cityName.setText(cityInfo.getSubtitleString());
         image.setImageResource(cityInfo.getDrawable());
+
+        DelicacyApplication.getInstance().setInDetailView();
 
     }
 

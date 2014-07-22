@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -33,14 +32,14 @@ public class DrawerFragment extends Fragment {
         view.findViewById(R.id.city_drawer_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activeCityView(view.getContext().getApplicationContext());
+                MainActivity.activateCityView(view.getContext().getApplicationContext());
             }
         });
 
         view.findViewById(R.id.delicacy_drawer_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.activeDelicacyView(view.getContext().getApplicationContext());
+                MainActivity.activateDelicacyView(view.getContext().getApplicationContext());
             }
         });
 
