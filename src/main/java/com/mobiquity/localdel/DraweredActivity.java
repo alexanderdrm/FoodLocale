@@ -76,4 +76,18 @@ public class DraweredActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        DelicacyApplication.getInstance().getBus().register(this);
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        DelicacyApplication.getInstance().getBus().unregister(this);
+    }
 }

@@ -46,7 +46,7 @@ public class DelicacyApplication extends Application {
         return inListView;
     }
 
-    /*private Bus bus;
+    private Bus bus;
 
     public Bus getBus() {
         return bus;
@@ -65,6 +65,7 @@ public class DelicacyApplication extends Application {
         Log.d(TAG, "onCreate()");
     }
 
+    /*
     @Override
     public void onTerminate() {
         super.onTerminate();

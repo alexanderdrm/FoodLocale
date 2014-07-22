@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import com.example.LocalDel.R;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,13 +28,27 @@ public class MainActivity extends DraweredActivity{
     InfoListAdapter cityAdapter;
     InfoListAdapter delicacyAdapter;
 
+    ListView infoList;
+
+    @Subscribe
+    public void onRequestDisplayChange(DisplayCitiesEvent dde) {
+        activeView = CITIES_VIEW;
+        infoList.setAdapter(cityAdapter);
+    }
+
+    @Subscribe
+    public void onRequestDisplayChange(DisplayDelicaciesEvent dde) {
+        activeView = DELICACIES_VIEW;
+        infoList.setAdapter(delicacyAdapter);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
 
-        ListView infoList = (ListView) findViewById(R.id.info_list);
+        infoList = (ListView) findViewById(R.id.info_list);
 
         cityAdapter = new InfoListAdapter(getApplicationContext(), new ArrayList<BaseInfo>(Arrays.asList(new CityInfo[]{
              InfoFactory.createCity("CityOne","CountryOne","This is the first!"),  InfoFactory.createCity("CityTwo","CountryOne","This is the second!"),
@@ -48,10 +63,10 @@ public class MainActivity extends DraweredActivity{
 
 
         if(intent == null || intent.getIntExtra("viewType", 0)==CITIES_VIEW) {
-            activeView = 0;
+            activeView = CITIES_VIEW;
             infoList.setAdapter(cityAdapter);
         } else {
-            activeView = 1;
+            activeView = DELICACIES_VIEW;
             infoList.setAdapter(delicacyAdapter);
         }
 
@@ -59,13 +74,14 @@ public class MainActivity extends DraweredActivity{
 
     }
 
-
     public static void activateCityView(Context context) {
         if(DelicacyApplication.getInstance().isInListView()) {
             if(activeView == CITIES_VIEW) {
                 return;
             } else {
                 //"just" swap out the adapter...
+                DelicacyApplication.postToBus(new DisplayCitiesEvent());
+                return;
             }
         }
         Intent intent = createIntent(context, CITIES_VIEW);
@@ -77,17 +93,18 @@ public class MainActivity extends DraweredActivity{
             if(activeView == DELICACIES_VIEW) {
                 return;
             } else {
-                //just swap out the adapter...
+                DelicacyApplication.postToBus(new DisplayDelicaciesEvent());
+                return;
             }
         }
         Intent intent = createIntent(context, DELICACIES_VIEW);
         context.startActivity(intent);
     }
-    
+
     private static Intent createIntent(Context context, int viewType) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); //for not saving history
         intent.putExtra("viewType", viewType);
         return intent;
     }
