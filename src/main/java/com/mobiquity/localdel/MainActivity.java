@@ -1,6 +1,8 @@
 package com.mobiquity.localdel;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,22 +26,17 @@ public class MainActivity extends Activity {
      */
 
     private static final String TAG = MainActivity.class.getName();
-
     private String[] drawerTitles;
-    private DrawerLayout mDrawerLayout;
-    private LinearLayout mDrawerList;
-
-
-    private String mTitle;
-    private String mDrawerTitle;
-    private ActionBarDrawerToggle mDrawerToggle;
-
     private static final int CITIES_VIEW = 0, DELICACIES_VIEW = 1;
-
     private static int activeView = 0;
-
     InfoListAdapter cityAdapter;
     InfoListAdapter delicacyAdapter;
+    DrawerFragment drawerFragment = new DrawerFragment();
+
+    public DrawerLayout mDrawerLayout;
+    public ActionBarDrawerToggle mDrawerToggle;
+    private String mTitle;
+    private String mDrawerTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,24 +67,7 @@ public class MainActivity extends Activity {
         }
 
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (LinearLayout) findViewById(R.id.left_drawer);
-
-        findViewById(R.id.city_drawer_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.activeCityView(getApplicationContext());
-            }
-        });
-
-        findViewById(R.id.delicacy_drawer_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.activeDelicacyView(getApplicationContext());
-            }
-        });
-
-        mTitle = mDrawerTitle = getTitle().toString();
+        mTitle = mDrawerTitle = "LocalDel";
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
                 R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
@@ -106,39 +86,14 @@ public class MainActivity extends Activity {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description */
-                R.string.drawer_close  /* "close drawer" description */
-        ) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getActionBar().setTitle(mTitle);
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(mDrawerTitle);
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+    //call the fragment here
+        getFragmentManager().beginTransaction().add(drawerFragment,"Drawer_Fragment").commit();
 
         DelicacyApplication.getInstance().setInListView();
+
 
     }
 
@@ -171,13 +126,7 @@ public class MainActivity extends Activity {
         context.startActivity(intent);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:id="@+id/left_drawer"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="start"
+        android:background="#111111"
+        android:showDividers="middle"
+        android:divider="@drawable/empty_tall_divider">
+    <RelativeLayout
+            android:id="@+id/city_drawer_button"
+            style="@style/drawer_button"
+            >
+        <TextView
+                android:text="@string/drawer_location"
+                style="@style/drawer_primary_text"/>
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/delicacy_drawer_button"
+            style="@style/drawer_button"
+            >
+
+        <TextView
+                android:text="@string/drawer_delicacy"
+                style="@style/drawer_primary_text"
+                />
+    </RelativeLayout>
+</LinearLayout>
