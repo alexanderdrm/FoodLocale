@@ -3,8 +3,12 @@ package com.mobiquity.localdel;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import com.example.LocalDel.R;
@@ -40,6 +44,7 @@ public class DraweredActivity extends Activity {
                 super.onDrawerClosed(view);
                 getActionBar().setTitle(appTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                Log.d("com.mobiquity.localdel.DraweredActivity", "Drawer finished closing "+System.currentTimeMillis());
             }
 
             /** Called when a drawer has settled in a completely open state. */
@@ -57,6 +62,8 @@ public class DraweredActivity extends Activity {
 
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
+
+
     }
 
     @Override
@@ -75,6 +82,20 @@ public class DraweredActivity extends Activity {
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);
+    }
+
+    protected void closeDrawer() {
+        Log.d("com.mobiquity.localdel.DraweredActivity", "Drawer starting to close "+System.currentTimeMillis());
+
+        Handler h = new Handler(Looper.getMainLooper());
+
+        //for some reason the drawer doesn't animate closing when closerDrawers() is directly called
+        h.post(new Runnable() {
+            public void run() {
+                drawerLayout.closeDrawers();
+            }
+        });
+
     }
 
     @Override

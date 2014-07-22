@@ -34,12 +34,14 @@ public class MainActivity extends DraweredActivity{
     public void onRequestDisplayChange(DisplayCitiesEvent dde) {
         activeView = CITIES_VIEW;
         infoList.setAdapter(cityAdapter);
+        closeDrawer();
     }
 
     @Subscribe
     public void onRequestDisplayChange(DisplayDelicaciesEvent dde) {
         activeView = DELICACIES_VIEW;
         infoList.setAdapter(delicacyAdapter);
+        closeDrawer();
     }
 
     @Override

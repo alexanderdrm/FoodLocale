@@ -43,29 +43,6 @@ public class DrawerFragment extends Fragment {
             }
         });
 
-       // mTitle = mDrawerTitle = "LocalDel";
-
-//        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.left_drawer);
-//        mDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout,
-//                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
-//
-//            /** Called when a drawer has settled in a completely closed state. */
-//            public void onDrawerClosed(View view) {
-//                super.onDrawerClosed(view);
-//                getActivity().getActionBar().setTitle(mTitle);
-//                getActivity().invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//
-//            /** Called when a drawer has settled in a completely open state. */
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                getActivity().getActionBar().setTitle(mDrawerTitle);
-//                getActivity().invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//        };
-//        // Set the drawer toggle as the DrawerListener
-//        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
         getActivity().getActionBar().setHomeButtonEnabled(true);
 
